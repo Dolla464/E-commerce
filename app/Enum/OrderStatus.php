@@ -16,4 +16,23 @@ enum OrderStatus: string
     {
         return array_column(self::cases(), 'value');
     }
+
+    // get allowed transitions
+    public function allowedTransitions(): array
+    {
+        return match ($this) {
+            self::PENDING => [self::PAID, self::CANCELLED],
+            self::PAID => [self::PROCESSING, self::CANCELLED],
+            self::PROCESSING => [self::SHIPPED, self::CANCELLED],
+            self::SHIPPED => [self::DELIVERED],
+            self::DELIVERED => [],
+            self::CANCELLED => [],
+        };
+    }
+
+    // validation can transition to
+    public function canTransitionTo( OrderStatus $targetStatus): bool
+    {
+        return in_array($targetStatus, $this->allowedTransitions());
+    }
 }

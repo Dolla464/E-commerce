@@ -149,6 +149,19 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderStatusHistory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderStatusHistory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|OrderStatusHistory query()
+ */
+	class OrderStatusHistory extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * @property \App\Enum\PaymentProvider $provider
+ * @property \App\Enum\PaymentStatus $status
+ * @property-read \App\Models\Order|null $order
+ * @property-read \App\Models\User|null $user
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Payment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Payment newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Payment query()
