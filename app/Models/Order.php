@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enum\OrderStatus;
 use App\Enum\PaymentStatus;
+use App\Events\OrderStatusChanged;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
@@ -75,6 +76,13 @@ class Order extends Model
             'changed_by' => $changedBy->id ?? Auth::id(),
             'notes'      => $notes,
         ]);
+
+        // dispatch orderStatusChanged event
+        OrderStatusChanged::dispatch(
+            $this,
+            $oldStatus->value,
+            $changedBy?->name ?? Auth::user()->name ,
+        );
         return true;
     }
 

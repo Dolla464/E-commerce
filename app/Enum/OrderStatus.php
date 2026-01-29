@@ -35,4 +35,17 @@ enum OrderStatus: string
     {
         return in_array($targetStatus, $this->allowedTransitions());
     }
+
+    // get label for status
+    public function getLabel(): string
+    {
+        return match ($this) {
+            self::PENDING => 'Pending',
+            self::PAID => 'Paid',
+            self::PROCESSING => 'Processing',
+            self::SHIPPED => 'Shipped',
+            self::DELIVERED => 'Delivered',
+            self::CANCELLED => 'Cancelled',
+        };
+    }
 }

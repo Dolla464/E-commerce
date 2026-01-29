@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Product;
+use App\Notifications\OrderConfirmationNotification;
 use Faker\Provider\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -124,6 +125,10 @@ class CheckOutController extends Controller
                 $cartItem->delete();
             });
             DB::commit();
+
+            // send order confirmation notification
+            $order->user->notify(new OrderConfirmationNotification($order));
+           
             return response()->json([
                 'success' => true,
                 'message' => 'Order placed successfully',
