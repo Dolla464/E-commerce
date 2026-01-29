@@ -1,4 +1,4 @@
-# 🛒 HEXAORA E-Commerce RESTful API
+# 🛒 E-Commerce RESTful API
 
 A comprehensive E-commerce Backend system built with **Laravel**, designed for learning and implementing advanced web development concepts. This project focuses on building a robust, secure, and well-documented API.
 
